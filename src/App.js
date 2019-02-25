@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import BooksList from '../components/BooksList';
 import BookForm from '../components/BookForm';
 import {showEditForm, saveEditedBook, saveNewBook, saveBooks, saveSorting } from "../services/actions";
-import { books, sorting } from '../src/constants';
 import {getBook} from '../services/model';
 
 
@@ -42,7 +41,6 @@ class BooksApp extends React.Component {
         } else {
             this.sendResults(values);
         }
-        window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
     }
 
     sendResults(values) {
