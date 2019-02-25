@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+import '../scss/book_component_extra.scss';
 
 class BookInfoBlock extends React.Component {
     constructor(props) {

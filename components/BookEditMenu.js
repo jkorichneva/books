@@ -1,6 +1,7 @@
 'use strict';
 import React from 'react';
 import SvgIcon from './SvgIcon';
+import '../scss/book_menu.scss';
 
 class BookEditMenu extends React.Component {
     constructor(props) {

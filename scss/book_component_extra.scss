@@ -1,0 +1,16 @@
+.book__component__extra {
+    transition: all 1s;
+    margin-top: 20px;
+    * {
+        font-size: 13px;
+        color: #707070;
+        padding: 2px 0;
+        max-width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    b {
+        color: #484848;
+    }
+}

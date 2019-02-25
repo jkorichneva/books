@@ -21,9 +21,14 @@ class BookComponent extends React.Component {
     }
 
     render() {
+        const style = {
+            background: `url(${this.props.book.photo}) no-repeat`,
+            backgroundSize: 'contain',
+            backgroundPosition: 'center'
+        };
         return (
             <div className='book__component'>
-                {this.props.book.photo && <img src={this.props.book.photo}/>}
+                {this.props.book.photo && <div className='book__image' style={style} />}
                 {!this.props.book.photo &&
                 <div className={classNames({
                     'book__no__photo': true,

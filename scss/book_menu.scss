@@ -1,0 +1,38 @@
+.book__edit__menu__wrap {
+    position: relative;
+    .book__edit__menu {
+        position: absolute;
+        right: 0;
+        top: 28px;
+        border: 1px solid #eeeeee;
+        border-radius: 4px;
+        background: white;
+        z-index: 5;
+        ul {
+            list-style: none;
+            margin: 0;
+            padding-left:0;
+            li {
+                padding: 10px;
+                cursor: pointer;
+                border-bottom: 1px solid #eeeeee;
+                &:last-of-type {
+                    border-bottom: none;
+                }
+                &:hover {
+                    background: #fafafa;
+                }
+            }
+        }
+    }
+}
+.book__edit {
+    position: absolute;
+    right: -5px;
+    padding: 10px;
+    top: -10px;
+    cursor: pointer;
+    svg {
+        width: 20px;
+    }
+}

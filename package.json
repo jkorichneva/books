@@ -26,6 +26,7 @@
     "postcss-loader": "^3.0.0",
     "qs": "^6.5.2",
     "react-input-mask": "^2.0.4",
+    "redux-form": "^8.1.0",
     "redux-promise-middleware": "^6.1.0",
     "redux-thunk": "^2.3.0",
     "sass-loader": "^7.1.0",

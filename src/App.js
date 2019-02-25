@@ -1,22 +1,55 @@
 'use strict';
 
 import React from 'react';
-import qs from 'qs';
 import { connect } from 'react-redux';
 import BooksList from '../components/BooksList';
 import BookForm from '../components/BookForm';
-import {showEditForm} from "../services/actions";
+import {showEditForm, saveEditedBook, saveNewBook, saveBooks, saveSorting } from "../services/actions";
+import { books, sorting } from '../src/constants';
 import {getBook} from '../services/model';
+
+
 
 class BooksApp extends React.Component {
     constructor(props) {
         super(props);
+        this.showResults = this.showResults.bind(this);
+        this.sendResults = this.sendResults.bind(this);
     }
 
     componentDidMount() {
+        if (localStorage.getItem('books')) {
+            this.props.dispatch(saveBooks(localStorage.getItem('books')));
+        }
+        if (localStorage.getItem('sorting')) {
+            this.props.dispatch(saveSorting(localStorage.getItem('sorting')));
+        }
         window.addEventListener("hashchange", e => this.hashChanged(window.location.hash));
-        if (window.location.hash !== 'create') {
+        if (window.location.hash !== 'create' && window.location.hash !== '') {
             this.props.dispatch(showEditForm(window.location.hash));
+        }
+    }
+
+    showResults(values) {
+        let form = this;
+        if (values.photo) {
+            var fr = new FileReader();
+            fr.onload = function (e) {
+                values.photo = e.target.result;
+                form.sendResults(values);
+            };
+            fr.readAsDataURL(values.photo);
+        } else {
+            this.sendResults(values);
+        }
+        window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
+    }
+
+    sendResults(values) {
+        if (values.id) {
+            this.props.dispatch(saveEditedBook(values.id, values));
+        } else {
+            this.props.dispatch(saveNewBook(values));
         }
     }
 
@@ -27,8 +60,9 @@ class BooksApp extends React.Component {
     render() {
         return (
             <div className='books__root'>
-                {this.props.showId !== '' && <BookForm
-                    book={this.props.showId === 'e' ? '' : getBook(this.props.showId, this.props.books)}/>}
+                {this.props.loading && <div>Загрузка</div>}
+                {this.props.showId !== '' && <BookForm onSubmit={this.showResults}
+                    book={this.props.showId === 'e' || this.props.showId === ''? '' : getBook(this.props.showId, this.props.books)}/>}
                 {this.props.showId === '' && <BooksList />}
             </div>
         )
@@ -36,7 +70,8 @@ class BooksApp extends React.Component {
 }
 export default connect (
     state => ({
-        showId: state.showId,
-        books: state.books,
+        loading: state.books.loading,
+        showId: state.books.showId,
+        books: state.books.books,
     }), null
 )(BooksApp)

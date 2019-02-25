@@ -1,10 +1,9 @@
 'use strict';
 
-import qs from "qs";
-import { getBook } from './model';
+import {getBook, getBookIndex, getLastId} from './model';
 
 let initialState = {
-    books: [
+    books:  [
         {   title: 'Алфавит',
             authors: [{name: 'Автор 1', surname: 'Автор 1 Фамилияgreagergergergreg'}, {name: 'Автор 2', surname: 'Автор 2 Фамилия'} ],
             pages: 183,
@@ -36,10 +35,19 @@ let initialState = {
             id: 3,
         }
     ],
+    loading: true,
     showId: window.location.hash.substr(-1),
-    editBook: {
-
-    }
+    editBook: {},
+    sorting: {
+        title: [
+            {name: 'title', value: 'asc', label: 'По алфавиту', checked: 'checked'},
+            {name: 'title', value: 'desc', label: 'Обратно алфавиту', checked: ''}
+        ],
+        year: [
+            {name: 'year', value: 'asc', label: 'По возрастанию', checked: 'checked'},
+            {name: 'year', value: 'desc', label: 'По убыванию', checked: ''}
+        ]
+    },
 };
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -58,8 +66,37 @@ export default (state = initialState, action) => {
             } else {
                 return {...state, showId: hash, editBook: {}};
             }
-        case 'EDIT_BOOK':
-            return {...state, editBook: {...state.editBook, [action.payload.name]: action.payload.value}}
+        case 'SAVE_EDITED':
+            let index = getBookIndex(action.payload.id, state.books);
+            let newEditedBooks = state.books.slice();
+            newEditedBooks[index] = action.payload.book;
+            window.location.hash = '';
+            localStorage.setItem('books', JSON.stringify(newEditedBooks));
+            return {...state, books: newEditedBooks};
+        case 'SAVE_NEW':
+            let newAddedBooks = state.books.slice();
+            let newBook = action.payload.book;
+            newBook.id = getLastId(state.books);
+            newAddedBooks.push(newBook);
+            window.location.hash = '';
+            localStorage.setItem('books', JSON.stringify(newAddedBooks));
+            return {...state, books: newAddedBooks};
+        case 'SAVE_BOOKS':
+            return {...state, books: JSON.parse(action.payload.books), loading: false};
+        case 'CHANGE_SORTING':
+            let sorting = state.sorting[action.payload.name].slice();
+            sorting.forEach((item, index) => {
+                if (item.value === action.payload.value) {
+                    item.checked = 'checked';
+                } else {
+                    item.checked = '';
+                }
+            });
+            let newSorting = {...state.sorting, [action.payload.name]: sorting};
+            localStorage.setItem('sorting', JSON.stringify(newSorting));
+            return {...state, sorting: newSorting};
+        case 'SAVE_SORTING':
+            return {...state, sorting: JSON.parse(action.payload.sorting), loading: false};
         default:
             return state;
     }
