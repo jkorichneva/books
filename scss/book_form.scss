@@ -12,6 +12,12 @@
             color: #ff7e7e;
         }
     }
+    .book__input__required {
+        color: #ff7e7e;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+    }
 
     .book__input {
         display: block;
@@ -25,6 +31,13 @@
         outline: 0;
         appearance: none;
         border-radius: 0;
+    }
+    .book__input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    .book__input[type=number] {
+        -moz-appearance: textfield;
     }
     label {
         display: block;

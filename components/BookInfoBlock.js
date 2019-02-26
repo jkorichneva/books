@@ -10,11 +10,11 @@ class BookInfoBlock extends React.Component {
         return (
             <div className='book__component__extra'>
                 {this.props.book.authors.map((author, index) => {
-                    return <div key={index}>{author.name} {author.surname}</div>
+                    return <div key={index}>Автор: {author.name} {author.surname}</div>
                 })}
                 {this.props.book.date && <div>Дата выхода в тираж: {this.props.book.date}</div>}
                 {this.props.book.publisher &&
-                <div className='book__publisher'><b>{this.props.book.publisher}</b></div>}
+                <div className='book__publisher'>Издательство: <b>{this.props.book.publisher}</b></div>}
                 {this.props.book.isbn && <b>ISBN: {this.props.book.isbn}</b>}
             </div>
         )

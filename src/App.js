@@ -14,6 +14,10 @@ class BooksApp extends React.Component {
         super(props);
         this.showResults = this.showResults.bind(this);
         this.sendResults = this.sendResults.bind(this);
+        this.closeSaved  = this.closeSaved.bind(this);
+        this.state = {
+            showSaved: false,
+        }
     }
 
     componentDidMount() {
@@ -31,7 +35,7 @@ class BooksApp extends React.Component {
 
     showResults(values) {
         let form = this;
-        if (values.photo) {
+        if (values.photo && typeof(values.photo) !== 'string' ) {
             var fr = new FileReader();
             fr.onload = function (e) {
                 values.photo = e.target.result;
@@ -41,6 +45,12 @@ class BooksApp extends React.Component {
         } else {
             this.sendResults(values);
         }
+        this.setState({showSaved: true});
+        setTimeout(this.closeSaved, 3000);
+    }
+
+    closeSaved() {
+        this.setState({showSaved: false});
     }
 
     sendResults(values) {
@@ -58,6 +68,7 @@ class BooksApp extends React.Component {
     render() {
         return (
             <div className='books__root'>
+                {this.state.showSaved && <div className='books__book__added'>Сохранено</div>}
                 {this.props.showId !== '' && <BookForm onSubmit={this.showResults}
                     book={this.props.showId === 'e' || this.props.showId === ''? '' : getBook(this.props.showId, this.props.books)}/>}
                 {this.props.showId === '' && <BooksList />}

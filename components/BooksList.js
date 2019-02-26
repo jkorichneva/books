@@ -30,13 +30,14 @@ class BooksList extends React.Component {
 
         return (
             <div className='books__list'>
-                <h1>Мои книги</h1>
+                <h1>Book-O-Tron 3000</h1>
                 <BookSorting title='По названию' sort={this.props.sort.title} />
                 <BookSorting title='По году издания' sort={this.props.sort.year} />
                 <button className='books__button books__button__right' onClick={this.addBook}>+ Добавить книгу</button>
                 {books.map((book, index) => {
                     return <BookComponent book={book} key={index} onEdit={() => this.editBook(book.id)} onDelete={() => this.deleteBook(book.id)} />
                 })}
+                <div className='easter'>Powered by Vault Tec</div>
             </div>
         );
     }

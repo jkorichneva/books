@@ -18,11 +18,11 @@ const validate = values => {
         values.authors.forEach((author, authorIndex) => {
             const authorErrors = {};
             if (author.name && author.name.length > 20) {
-                authorErrors.name = 'Имя не может быть более 20 символов';
+                authorErrors.name = 'Имя не может содержать более 20 символов';
                 authorsArrayErrors[authorIndex] = authorErrors
             }
             if (author.surname && author.surname.length > 20) {
-                authorErrors.surname = 'Фамилия не может быть более 20 символов';
+                authorErrors.surname = 'Фамилия не может содержать более 20 символов';
                 authorsArrayErrors[authorIndex] = authorErrors
             }
         });
@@ -37,20 +37,20 @@ const validate = values => {
     });
     notLongerThan30.forEach(field => {
         if (values[field] && values[field].length > 30) {
-            errors[field] = 'Значение в поле не может быть более 30 символов'
+            errors[field] = 'Значение не может содержать более 30 символов'
         }
     });
     if (values.pages < 0 || values.pages > 10000) {
-        errors.pages = 'Количество страниц может быть от 0 до 10000';
+        errors.pages = 'Укажите значение от 0 до 10000';
     }
     if (values.year && values.year < 1800) {
-        errors.year = 'Указанный год должен быть более 1800';
+        errors.year = 'Укажите значение более 1800';
     }
     if (values.date && values.date < '1800-01-01') {
-        errors.date = 'Дата должна быть после 01.01.1800';
+        errors.date = 'Укажите дату не ранее 01.01.1800';
     }
     if (values.isbn && !isValidISBN(values.isbn)) {
-        errors.isbn = 'Невалидный ISBN';
+        errors.isbn = 'Неверный ISBN';
     }
 
     return errors;

@@ -22,9 +22,10 @@ class BookComponent extends React.Component {
 
     render() {
         const style = {
-            background: `url(${this.props.book.photo}) no-repeat`,
+            backgroundImage: `url(${this.props.book.photo})`,
+            backgroundRepeat  : 'no-repeat',
+            backgroundPosition: 'center',
             backgroundSize: 'contain',
-            backgroundPosition: 'center'
         };
         return (
             <div className='book__component'>

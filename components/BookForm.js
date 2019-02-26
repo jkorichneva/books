@@ -16,13 +16,15 @@ let BookForm = props => {
             <form onSubmit={handleSubmit}>
                 <Field name='id' type='hidden' component={renderField}/>
                 <Field name="title" component={renderField} type="text" label='Название книги'
+                       required
                 />
                 <FieldArray name="authors" component={renderAuthors}/>
-                <Field name="pages" component={renderField} type="text" label='Кол-во страниц'
+                <Field name="pages" component={renderField} type="number" label='Кол-во страниц'
+                       required
                 />
                 <Field name="publisher" component={renderField} type="text" label='Издательство'
                 />
-                <Field name="year" component={renderField} type="text" label='Год публикации'
+                <Field name="year" component={renderField} type="number" label='Год публикации'
                 />
                 <Field name="date" component={renderField} type="date" label='Дата выхода в тираж'
                 />
@@ -39,7 +41,7 @@ let BookForm = props => {
     )
 };
 
-const renderField = ({input, label, type, meta: {touched, error, warning}}) => (
+const renderField = ({input, label, required, type, meta: {touched, error, warning}}) => (
     <div className={classNames({
         'book__input__block': true,
         'book__input__with__error': touched && !!error
@@ -47,6 +49,7 @@ const renderField = ({input, label, type, meta: {touched, error, warning}}) => (
         <label className='label__moved label__transformed'>{label}</label>
         <div>
             <input {...input} type={type} className={'book__input'}/>
+            {required && <div className='book__input__required'>*</div>}
             {touched && ((error && <div className='book__input__error'>{error}</div>) || (warning &&
                 <span>{warning}</span>))}
         </div>
