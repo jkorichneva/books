@@ -68,7 +68,7 @@ class BooksApp extends React.Component {
     render() {
         return (
             <div className='books__root'>
-                {this.state.showSaved && <div className='books__book__added'>Сохранено</div>}
+                {this.state.showSaved && <div className='books__book__added'>Изменения сохранены</div>}
                 {this.props.showId !== '' && <BookForm onSubmit={this.showResults}
                     book={this.props.showId === 'e' || this.props.showId === ''? '' : getBook(this.props.showId, this.props.books)}/>}
                 {this.props.showId === '' && <BooksList />}
