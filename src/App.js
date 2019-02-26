@@ -58,7 +58,6 @@ class BooksApp extends React.Component {
     render() {
         return (
             <div className='books__root'>
-                {this.props.loading && <div>Загрузка</div>}
                 {this.props.showId !== '' && <BookForm onSubmit={this.showResults}
                     book={this.props.showId === 'e' || this.props.showId === ''? '' : getBook(this.props.showId, this.props.books)}/>}
                 {this.props.showId === '' && <BooksList />}
@@ -68,7 +67,6 @@ class BooksApp extends React.Component {
 }
 export default connect (
     state => ({
-        loading: state.books.loading,
         showId: state.books.showId,
         books: state.books.books,
     }), null
