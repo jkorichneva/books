@@ -3,6 +3,7 @@ import React from 'react';
 import InputRadio from './InputRadio';
 import {changeSorting} from '../services/actions';
 import {connect} from "react-redux";
+import '../scss/book_sorting.scss';
 
 class BooksSorting extends React.Component {
     constructor(props) {

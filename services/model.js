@@ -33,6 +33,23 @@ export const getLastId = (books) => {
     return resultId;
 };
 
+export const getCurrentSorting = (sorting) => {
+    let sortDefault = {};
+    if (sorting.year[1].checked && sorting.title[0].checked) {
+        sortDefault = {title: sortAlphabetically,  year: sortYearDesc};
+    }
+    if (sorting.year[0].checked && sorting.title[0].checked) {
+        sortDefault = {title: sortAlphabetically,  year: sortYearAsc};
+    }
+    if (sorting.title[1].checked && sorting.year[0].checked) {
+        sortDefault = {title: sortAlphabeticallyVersa,  year: sortYearAsc};
+    }
+    if (sorting.title[1].checked && sorting.year[1].checked) {
+        sortDefault = {title: sortAlphabeticallyVersa,  year: sortYearDesc};
+    }
+    return sortDefault;
+}
+
 
 export const sortYearDesc = (a, b) => b.year - a.year;
 export const sortYearAsc  = (a, b) => a.year - b.year;

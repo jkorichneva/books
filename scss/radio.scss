@@ -1,0 +1,62 @@
+.book_radio {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 15px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.book_radio input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.book_radio label {
+    cursor: pointer;
+}
+
+.book_radio_span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    background-color: #eee;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.book_radio:hover input ~ .book_radio_span {
+    background-color: #ccc;
+}
+
+.book_radio input:checked ~ .book_radio_span {
+    background-color: #24b7a8;
+}
+
+.book_radio_span:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.book_radio input:checked ~ .book_radio_span:after {
+    display: block;
+}
+
+.book_radio .book_radio_span:after {
+    top: 5px;
+    left: 5px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: white;
+}

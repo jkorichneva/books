@@ -1,4 +1,7 @@
+'use strict';
+
 import React, {Component} from 'react'
+import '../scss/file_input.scss';
 
 export default class FieldFileInput  extends Component{
     constructor(props) {
@@ -15,7 +18,7 @@ export default class FieldFileInput  extends Component{
         const { input: { value } } = this.props
         const {input,label, required, meta, } = this.props  //whatever props you send to the component from redux-form Field
         return(
-            <div><label>{label}</label>
+            <div className='books__file__input'><label>{label}</label>
                 <div>
                     <input
                         type='file'

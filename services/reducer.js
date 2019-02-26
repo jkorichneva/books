@@ -94,7 +94,7 @@ export default (state = initialState, action) => {
             });
             let newSorting = {...state.sorting, [action.payload.name]: sorting};
             localStorage.setItem('sorting', JSON.stringify(newSorting));
-            return {...state, sorting: newSorting};
+            return {...state, sorting: newSorting };
         case 'SAVE_SORTING':
             return {...state, sorting: JSON.parse(action.payload.sorting), loading: false};
         default:

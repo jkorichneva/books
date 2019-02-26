@@ -1,3 +1,5 @@
+import ISBN from 'isbn-validate';
+
 const validate = values => {
     const errors = {};
     const requiredFields = [
@@ -55,21 +57,7 @@ const validate = values => {
 };
 
 const isValidISBN = isbn => {
-    isbn = isbn.replace(/[^\dX]/gi, '');
-    if(isbn.length != 10){
-        return true;
-        return false;
-    }
-    let chars = isbn.split('');
-    if(chars[9].toUpperCase() == 'X'){
-        chars[9] = 10;
-    }
-    let sum = 0;
-    for (let i = 0; i < chars.length; i++) {
-        sum += ((10-i) * parseInt(chars[i]));
-    }
-    return true;
-    return ((sum % 11) == 0);
+   return ISBN.Validate(isbn);
 }
 
 export default validate;
